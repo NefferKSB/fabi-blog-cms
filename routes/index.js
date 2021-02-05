@@ -34,7 +34,7 @@ router.get('/post', (req, res, next) => {
 
 //Get post by ID
 router.get('/post/:id', (req, res, next) => {
-  Post.findById(req.params.id, (req, res, next) => {
+  Post.findById(req.params.id, (err, post) => {
     if(err) return next(err);
     res.json(post);
   });
