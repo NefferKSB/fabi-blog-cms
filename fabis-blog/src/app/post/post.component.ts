@@ -1,4 +1,4 @@
-export class PostComponent {
+export class Post {
   category: string = '';
   id: string = '';
   postTitle: string = '';

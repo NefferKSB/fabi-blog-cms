@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { HomeComponent } from '../home/home.component';
+import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { BycategoryComponent } from './bycategory/bycategory.component';
 import { DetailsComponent } from './details/details.component';

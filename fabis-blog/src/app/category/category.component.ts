@@ -1,4 +1,4 @@
-export class CategoryComponent {
+export class Category {
   id: number = 0;
   catName: string = '';
   catDesc: string = '';

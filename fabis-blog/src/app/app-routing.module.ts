@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { HomeComponent } from '../home/home.component';
+import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
 import { AdminComponent } from './admin/admin.component';
-import { CategoryComponent } from './category/category.component';
-import { PostComponent } from './post/post.component';
+import { Category } from './category/category.component';
+import { Post } from './post/post.component';
 import { CategoryDetailsComponent } from './category/category-details/category-details.component';
 import { CategoryAddComponent } from './category/category-add/category-add.component';
 import { CategoryEditComponent } from './category/category-edit/category-edit.component';
@@ -53,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: 'category',
-    component: CategoryComponent,
+    component: Category,
     data: { title: 'Category' }
   },
   {
@@ -73,7 +73,7 @@ const routes: Routes = [
   },
   {
     path: 'post',
-    component: PostComponent,
+    component: Post,
     data: { title: 'Post' }
   },
   {
