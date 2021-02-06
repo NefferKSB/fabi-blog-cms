@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-
-@Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
-})
-export class PostComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class PostComponent {
+  category: string = '';
+  id: string = '';
+  postTitle: string = '';
+  postAuthor: string = '';
+  postDesc: string = '';
+  postContent: string = '';
+  postReference: string = '';
+  postImgUrl: string = '';
+  created: Date = new Date();
+  updated: Date = new Date();
 }
