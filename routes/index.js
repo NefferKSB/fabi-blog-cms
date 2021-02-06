@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/category');
-const Category = require('../models/post');
+const Post = require('../models/post');
+const Category = require('../models/category');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

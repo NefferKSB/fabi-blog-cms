@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
 const passport = require('passport');
-const config = require('../config/database');
 require('../config/passport')(passport);
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -40,7 +38,7 @@ router.post('/register', (req, res) => {
             user.comparePassword(req.body.password, (err, isMatch) => {
                 if(isMatch && !err) {
                     //If user is found and password is right create a token
-                    const token = jwt.sign(user.toJSON(), config.secret);
+                    const token = jwt.sign(user.toJSON(), process.env.JWT_KEY);
 
                     //Return the information including token as JSON
                     res.json({success: true, token: 'JWT' + token});
