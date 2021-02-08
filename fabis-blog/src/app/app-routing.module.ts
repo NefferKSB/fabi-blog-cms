@@ -5,8 +5,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
 import { AdminComponent } from './admin/admin.component';
-import { Category } from './category/category.component';
-import { Post } from './post/post.component';
+import { CategoryComponent } from './category/category.component';
+import { PostComponent } from './post/post.component';
 import { CategoryDetailsComponent } from './category/category-details/category-details.component';
 import { CategoryAddComponent } from './category/category-add/category-add.component';
 import { CategoryEditComponent } from './category/category-edit/category-edit.component';
@@ -53,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: 'category',
-    component: Category,
+    component: CategoryComponent,
     data: { title: 'Category' }
   },
   {
@@ -73,7 +73,7 @@ const routes: Routes = [
   },
   {
     path: 'post',
-    component: Post,
+    component: PostComponent,
     data: { title: 'Post' }
   },
   {

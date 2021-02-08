@@ -1,8 +1,31 @@
-export class Category {
-  id: number = 0;
-  catName: string = '';
-  catDesc: string = '';
-  catImgUrl: string = '';
-  catContent: string = '';
-  updated: Date = new Date();
+import { Component, OnInit } from "@angular/core";
+import { CategoryService } from '../services/category.service';
+import { Category } from './category';
+
+@Component({
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
+})
+
+export class CategoryComponent implements OnInit {
+
+  displayedColumns: string[] = ['catName', 'catDesc'];
+  data: Category[] = [];
+  isLoadingResults = true;
+
+  constructor(private api: CategoryService) { }
+
+  ngOnInit() {
+    console.log(this);
+    this.api.getCategories()
+      .subscribe((res: any) => {
+        this.data = res;
+        console.log(this.data);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
+  }
 }

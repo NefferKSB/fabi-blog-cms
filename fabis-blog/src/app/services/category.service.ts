@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { catchError, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { Category } from "../category/category.component";
+import { Category } from "../category/category";
 
 const BACKEND_URL = environment.apiURL + '/public/';
 
