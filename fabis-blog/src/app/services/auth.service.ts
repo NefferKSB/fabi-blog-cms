@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
-const BACKEND_URL = environment.apiURL + '/auth/';
+const BACKEND_URL = environment.apiURL + 'auth/';
 
 @Injectable({
   providedIn: 'root'

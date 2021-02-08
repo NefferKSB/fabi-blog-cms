@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults"
+  >
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <mat-card class="example-card">
+    <form
+    #loginForm="ngForm"
+    (submit)="onFormSubmit(loginForm)"
+    >
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          ngModel
+          #email="ngModel"
+          name="email"
+          type="email"
+          placeholder="Your Email"
+          required
+        />
+        <mat-error>
+          <span *ngIf="!loginForm.valid">Please enter your username</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          ngModel
+          #username="ngModel"
+          name="username"
+          type="username"
+          placeholder="Password"
+          required
+        />
+        <mat-error>
+          <span *ngIf="!loginForm.valid">Please enter your password</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button type="submit" [disabled]="!loginForm.valid" mat-flat-button color="primary">Login</button>
+      </div>
+      <div class="button-row">
+        <button type="button" mat-flat-button color="primary" (click)="register()">Register</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -9,26 +9,24 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm: FormGroup;
-  username = '';
-  password = '';
-  matcher = new MyErrorStateMatcher();
+  //matcher = new MyErrorStateMatcher();
   isLoadingResults = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
-    this.loginForm = formBuilder.group({});
-   }
-
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      'username': [null, Validators.required],
-      'password': [null, Validators.required]
+    this.loginForm = formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
-  }
+   }
 
   //Function for handling form submission
   onFormSubmit(form: NgForm) {
+    if(form.invalid) {
+      return;
+    }
+
     this.authService.login(form)
       .subscribe(res => {
         console.log(res);
