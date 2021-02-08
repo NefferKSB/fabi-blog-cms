@@ -1,8 +1,8 @@
 export class Category {
-  id: number = 0;
+  id: number | null = 0;
   catName: string = '';
   catDesc: string = '';
   catImgUrl: string = '';
   catContent: string = '';
-  updated: Date = new Date();
+  updated: Date | null = new Date();
 }
