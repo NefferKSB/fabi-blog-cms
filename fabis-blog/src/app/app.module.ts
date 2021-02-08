@@ -32,6 +32,8 @@ import { PostDetailsComponent } from './post/post-details/post-details.component
 import { PostEditComponent } from './post/post-edit/post-edit.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { CKEditorModule } from 'ckeditor4-angular';
+import { MatContenteditableModule } from 'mat-contenteditable';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     MatCardModule,
     MatFormFieldModule,
     MatMenuModule,
-    MatToolbarModule
+    MatToolbarModule,
+    CKEditorModule,
+    MatContenteditableModule
   ],
   providers: [
     {
