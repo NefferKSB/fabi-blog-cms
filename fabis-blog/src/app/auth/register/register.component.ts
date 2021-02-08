@@ -1,15 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
+  registerForm: FormGroup;
+  isLoadingResults = false;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
+    this.registerForm = this.formBuilder.group({
+      fullName : ['', Validators.required],
+      username : ['', Validators.required],
+      password : ['', Validators.required]
+    });
+   }
 
-  ngOnInit(): void {
+   onFormSubmit(form: NgForm) {
+    this.authService.register(form)
+      .subscribe(res => {
+        this.router.navigate(['login']);
+      }, (err) => {
+        console.log(err);
+        alert(err.error);
+      });
   }
 
 }
