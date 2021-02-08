@@ -1,1 +1,68 @@
-<p>category-add works!</p>
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/category']"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <form
+      #categoryForm="ngModel"
+      ngModel
+      (submit)="onFormSubmit()"
+    >
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          ngModel
+          #catName="ngModel"
+          name="catName"
+          placeholder="Category Name"
+        >
+        <mat-error>
+          <span *ngIf="(catName.touched && catName.invalid)">Please enter Category Name</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea
+          matInput
+          ngModel
+          #catDesc="ngModel"
+          name="catDesc"
+          placeholder="Category Desc"
+        ></textarea>
+        <mat-error>
+          <span *ngIf="(catDesc.touched && catDesc.invalid)">Please enter Category Description</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          ngModel
+          #catImgUrl="ngModel"
+          name="catImgUrl"
+          placeholder="Category Image URL"
+        >
+        <mat-error>
+          <span *ngIf="catImgUrl.touched && catImgUrl.invalid">Please enter Category Image URL</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <ckeditor
+            matCkeditor
+            ngModel
+            #catContent="ngModel"
+            name="catImgUrl"
+            placehoder="Category Content"
+          ></ckeditor>
+          <mat-error>
+            <span *ngIf="catContent.touched && catContent.invalid">Please enter Category Description</span>
+          </mat-error>
+        </mat-form-field>
+      <div class="button-row">
+        <button type="submit" [disabled]="!categoryForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+    </form>
+  </mat-card>
+</div>

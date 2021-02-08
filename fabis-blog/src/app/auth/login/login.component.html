@@ -20,7 +20,7 @@
           required
         />
         <mat-error>
-          <span *ngIf="!loginForm.valid">Please enter your username</span>
+          <span *ngIf="(email.touched && email.invalid)">Please enter your username</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
@@ -34,7 +34,7 @@
           required
         />
         <mat-error>
-          <span *ngIf="!loginForm.valid">Please enter your password</span>
+          <span *ngIf="(username.touched && username.invalid)">Please enter your password</span>
         </mat-error>
       </mat-form-field>
       <div class="button-row">
