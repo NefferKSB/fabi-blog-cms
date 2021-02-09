@@ -35,6 +35,7 @@ import { PostDetailsComponent } from './post/post-details/post-details.component
 import { PostEditComponent } from './post/post-edit/post-edit.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     CategoryAddComponent,
     CategoryEditComponent,
     CategoryComponent,
+    PostComponent,
     PostDetailsComponent,
     PostAddComponent,
     PostEditComponent

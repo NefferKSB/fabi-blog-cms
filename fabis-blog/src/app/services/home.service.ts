@@ -1,10 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { Category } from '../category/category.component';
+import { Category } from '../category/category';
 import { environment } from "src/environments/environment";
 import { catchError, tap } from "rxjs/operators";
-import { Post } from '../post/post.component';
+import { Post } from '../post/post';
 
 const BACKEND_URL = environment.apiURL + '/public/';
 
