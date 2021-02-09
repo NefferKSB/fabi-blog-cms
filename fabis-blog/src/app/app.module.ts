@@ -1,3 +1,4 @@
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatContenteditableModule } from 'mat-contenteditable';
+
 
 
 import { AdminComponent } from './admin/admin.component';
@@ -32,8 +35,6 @@ import { PostDetailsComponent } from './post/post-details/post-details.component
 import { PostEditComponent } from './post/post-edit/post-edit.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { CKEditorModule } from 'ckeditor4-angular';
-import { MatContenteditableModule } from 'mat-contenteditable';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MatContenteditableModule } from 'mat-contenteditable';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    CKEditorModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -70,7 +72,6 @@ import { MatContenteditableModule } from 'mat-contenteditable';
     MatFormFieldModule,
     MatMenuModule,
     MatToolbarModule,
-    CKEditorModule,
     MatContenteditableModule
   ],
   providers: [

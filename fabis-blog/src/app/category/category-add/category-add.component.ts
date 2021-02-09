@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
-import { ErrorStateMatcher } from '@angular/material/core';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./category-add.component.scss']
 })
 export class CategoryAddComponent implements OnInit {
+  public Editor = ClassicEditor;
   categoryForm: FormGroup = new FormGroup({});
   isLoadingResults = false;
 

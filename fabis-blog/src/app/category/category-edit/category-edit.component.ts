@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CategoryService } from 'src/app/services/category.service';
+
 
 @Component({
   selector: 'app-category-edit',
@@ -9,6 +11,7 @@ import { CategoryService } from 'src/app/services/category.service';
   styleUrls: ['./category-edit.component.scss']
 })
 export class CategoryEditComponent implements OnInit {
+  public Editor = ClassicEditor;
   categoryForm: FormGroup = new FormGroup({});
   updated: Date = new Date();
   isLoadingResults = false;
