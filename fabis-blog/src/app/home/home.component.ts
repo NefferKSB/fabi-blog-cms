@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from '../post/post';
+import { HomeService } from '../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  posts: Post[] = [];
+  isLoadingResults = true;
 
-  constructor() { }
+  constructor(private api: HomeService) { }
 
   ngOnInit(): void {
+    this.api.getPosts()
+      .subscribe((res: any) => {
+        this.posts = res;
+        console.log(this.posts);
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
 
 }

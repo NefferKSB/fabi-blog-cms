@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatContenteditableModule } from 'mat-contenteditable';
 
@@ -75,6 +76,7 @@ import { PostComponent } from './post/post.component';
     MatMenuModule,
     MatToolbarModule,
     MatSelectModule,
+    MatGridListModule,
     MatContenteditableModule
   ],
   providers: [
