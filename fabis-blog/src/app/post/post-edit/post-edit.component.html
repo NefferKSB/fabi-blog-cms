@@ -1,1 +1,106 @@
-<p>post-edit works!</p>
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+        *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" (click)="postDetails()"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <form
+      ngModel
+      #postForm="ngModel"
+      (submit)="onFormSubmit()"
+    >
+      <mat-form-field class="example-full-width">
+        <mat-select
+          ngModel
+          #category="ngModel"
+          name="category"
+        >
+          <mat-option *ngFor="let cat of categories" [value]="cat.id">
+            {{cat.catName}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+          <span *ngIf="(category.touched && category.invalid)">Please select Category</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          ngModel
+          #postTitle="ngModel"
+          name="postTitle"
+          placeholder="Post Title"
+        >
+        <mat-error>
+          <span *ngIf="(postTitle.touched && postTitle.invalid)">Please enter Post Title</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          ngModel
+          #postAuthor="ngModel"
+          name="postAuthor"
+          placeholder="Post Author"
+        >
+        <mat-error>
+          <span *ngIf="(postAuthor.touched && postAuthor.invalid)">Please enter Post Author</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <textarea
+          matInput
+          ngModel
+          #postDesc="ngModel"
+          name="postDesc"
+          placeholder="Post Desc"
+        ></textarea>
+        <mat-error>
+          <span *ngIf="(postDesc.touched && postDesc.invalid)">Please enter Post Description</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <ckeditor
+            matInput
+            ngModel
+            #postContent="ngModel"
+            name="postContent"
+            placehoder="Post Content"
+          ></ckeditor>
+          <mat-error>
+            <span *ngIf="(postContent.touched && postContent.invalid)">Please enter Post Content</span>
+          </mat-error>
+        </mat-form-field>
+      <div class="button-row">
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          ngModel
+          #postReference="ngModel"
+          name="postReference"
+          placeholder="Post Reference"
+        >
+        <mat-error>
+          <span *ngIf="(postReference.touched && postReference.invalid)">Please enter Post Ref</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <input
+            matInput
+            ngModel
+            #catImgUrl="ngModel"
+            name="catImgUrl"
+            placeholder="Post Image URL"
+          >
+          <mat-error>
+            <span *ngIf="(catImgUrl.touched && catImgUrl.invalid)">Please enter Post Image URL</span>
+          </mat-error>
+        </mat-form-field>
+        <button type="submit" [disabled]="!postForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+    </form>
+  </mat-card>
+</div>
