@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
-const BACKEND_URL = environment.apiURL + 'auth/';
+const BACKEND_URL = environment.apiURL + '/auth/';
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +40,11 @@ export class AuthService {
   }
 
   register(data: any): Observable<any> {
+    console.log(data);
     return this.http.post<any>(BACKEND_URL + 'register', data)
       .pipe(
-        tap(_ => this.log('login')),
-        catchError(this.handleError('login', []))
+        tap(_ => this.log('register')),
+        catchError(this.handleError('registration', []))
       );
   }
 

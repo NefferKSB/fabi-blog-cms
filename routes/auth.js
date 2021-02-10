@@ -6,11 +6,12 @@ const router = express.Router();
 const User = require('../models/user');
 
 //Create a router for registering a new user via a provided username and password
-router.post('/login', (req, res) => {
+router.post('/register', (req, res) => {
     if(!req.body.username || !req.body.password) {
         res.json({success: false, msg: 'Please provide both a username and password.'});
     } else {
         const newUser = new User ({
+            fullName: req.body.fullName,
             username: req.body.username,
             password: req.body.password
         });
@@ -25,7 +26,7 @@ router.post('/login', (req, res) => {
 });
 
 //Create a router for allowing a user to login into the blog CMS via a username and password
-router.post('/register', (req, res) => {
+router.post('/login', (req, res) => {
     User.findOne({
         username: req.body.username
     }, (err, user) => {
