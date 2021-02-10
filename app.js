@@ -12,9 +12,6 @@ const postRouter = require('./routes/post');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-const app = express();
-app.use(passport.initialize());
-
 mongoose.connect('mongodb+srv://kennan:' + process.env.MONGO_ATLAS_PWR + '@cluster0.9akcx.mongodb.net/mean-tutorial-db?retryWrites=true&w=majority', {
     promiseLibrary: require('bluebird'),
     useNewUrlParser: true,
@@ -23,11 +20,7 @@ mongoose.connect('mongodb+srv://kennan:' + process.env.MONGO_ATLAS_PWR + '@clust
 }).then(() =>  console.log('connection successful'))
   .catch((err) => console.error(err));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+const app = express();
 
 //Disable CORs
 app.use((req, res, next) => {
@@ -37,10 +30,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/public', indexRouter);
-app.use('/users', usersRouter);
+app.use(passport.initialize());
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 app.use('/api/auth', authRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/post', postRouter);
+app.use('/api/public', indexRouter);
+app.use('/users', usersRouter);
 
 module.exports = app;

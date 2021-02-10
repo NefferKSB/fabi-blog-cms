@@ -15,7 +15,7 @@ export class RegisterComponent {
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
     this.registerForm = this.formBuilder.group({
       fullName : ['', Validators.required],
-      username : ['', Validators.required],
+      email : ['', Validators.required],
       password : ['', Validators.required]
     });
    }

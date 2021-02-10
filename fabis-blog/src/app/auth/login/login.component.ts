@@ -11,12 +11,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  //matcher = new MyErrorStateMatcher();
   isLoadingResults = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
     this.loginForm = formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
    }

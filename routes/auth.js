@@ -7,8 +7,8 @@ const User = require('../models/user');
 
 //Create a router for registering a new user via a provided username and password
 router.post('/register', (req, res) => {
-    if(!req.body.username || !req.body.password) {
-        res.json({success: false, msg: 'Please provide both a username and password.'});
+    if(!req.body.fullName || !req.body.username || !req.body.password) {
+        res.json({success: false, msg: 'Please provide a full name, username, and password.'});
     } else {
         const newUser = new User ({
             fullName: req.body.fullName,

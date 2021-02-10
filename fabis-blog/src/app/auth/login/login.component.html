@@ -7,7 +7,7 @@
   <mat-card class="example-card">
     <form
     #loginForm="ngForm"
-    (submit)="onFormSubmit(loginForm)"
+    (submit)="onFormSubmit(loginForm.value)"
     >
       <mat-form-field class="example-full-width">
         <input
@@ -27,14 +27,14 @@
         <input
           matInput
           ngModel
-          #username="ngModel"
-          name="username"
-          type="username"
-          placeholder="Password"
+          #password="ngModel"
+          name="password"
+          type="password"
+          placeholder="Your Password"
           required
         />
         <mat-error>
-          <span *ngIf="(username.touched && username.invalid)">Please enter your password</span>
+          <span *ngIf="(password.touched && password.invalid)">Please enter your password</span>
         </mat-error>
       </mat-form-field>
       <div class="button-row">

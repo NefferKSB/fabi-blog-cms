@@ -1,7 +1,6 @@
 const passport = require('passport');
 require('../config/passport')(passport);
 const express = require('express');
-//const jwt = require('jsonwebtoken');
 const router = express.Router();
 const Category = require('../models/category');
 
@@ -76,8 +75,10 @@ getToken = (headers) => {
         if(parted.length === 2) {
             return parted[1];
         } else {
-            return null
+            return null;
         }
+    } else {
+        return null;
     }
 };
 

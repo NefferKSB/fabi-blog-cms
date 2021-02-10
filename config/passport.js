@@ -5,12 +5,12 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/user');
 const settings = require('../config/settings'); // get settings file
 
-module.exports = function(passport) {
+module.exports = passport => {
   let opts = {};
   opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
   opts.secretOrKey = settings.secret;
-  passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findOne({id: jwt_payload.id}, function(err, user) {
+  passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+    User.findOne({id: jwt_payload.id}, (err, user) => {
           if (err) {
               return done(err, false);
           }

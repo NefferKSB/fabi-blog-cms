@@ -6,7 +6,7 @@
   <mat-card class="example-card">
     <form
       #registerForm="ngForm"
-      (ngSubmit)="onFormSubmit(registerForm)"
+      (ngSubmit)="onFormSubmit(registerForm.value)"
     >
       <mat-form-field class="example-full-width">
         <input

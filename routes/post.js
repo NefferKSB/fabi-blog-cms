@@ -1,12 +1,11 @@
 const passport = require('passport');
 require('../config/passport')(passport);
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const router = express.Router();
 const Post = require('../models/category');
 
 //Add a route to GET the list of posts
-router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
     const token = getToken(req.headers);
     if(token) {
         Post.find((err, posts) => {
@@ -18,11 +17,24 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
     }
 });
 
-//Add a route to POST post data
-router.post('/', passport.authenticate('jwt', { session: false}), (req, res, next) => {
+//Add a route to GET a post by id
+router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
-        Post.create(req.body, function (err, post) {
+        Post.findById(req.params.id, (err, post) => {
+            if(err) return next(err);
+            res.json(post);
+        });
+    } else {
+        return res.status(403).send({success: false, msg: 'Unauthorized'});
+    }
+});
+
+//Add a route to POST post data
+router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    const token = getToken(req.headers);
+    if(token) {
+        Post.create(req.body, (err, post) => {
             if(err) return next(err);
             res.json(post);
         });
@@ -32,7 +44,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res, nex
 });
 
 //Add a router to UPDATE post data by ID 
-router.put('/:id', passport.authenticate('jwt', { session: false}), (req, res, next) => {
+router.put('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Post.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
@@ -45,7 +57,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false}), (req, res, n
 });
 
 //Add a router to DELETE post data by ID
-router.delete('/:id', passport.authenticate('jwt', { session: false}), (req, res, next) => {
+router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Post.findByIdAndRemove(req.params.id, req.body, (err, post) => {

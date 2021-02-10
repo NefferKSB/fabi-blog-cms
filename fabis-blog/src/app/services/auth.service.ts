@@ -40,7 +40,6 @@ export class AuthService {
   }
 
   register(data: any): Observable<any> {
-    console.log(data);
     return this.http.post<any>(BACKEND_URL + 'register', data)
       .pipe(
         tap(_ => this.log('register')),

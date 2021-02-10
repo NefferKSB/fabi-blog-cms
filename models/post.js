@@ -1,6 +1,6 @@
-var mongoose = require('mongoose'), Schema = mongoose.Schema;
+const mongoose = require('mongoose'), Schema = mongoose.Schema;
 
-var PostSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
   category : { type: Schema.Types.ObjectId, ref: 'Category' },
   id: String,
   postTitle: String,
