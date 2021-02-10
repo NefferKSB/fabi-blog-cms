@@ -6,13 +6,14 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-const auth = require('./routes/auth');
-const category = require('./routes/category');
-const post = require('./routes/post');
+const authRouter = require('./routes/auth');
+const categoryRouter = require('./routes/category');
+const postRouter = require('./routes/post');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+app.use(passport.initialize());
 
 mongoose.connect('mongodb+srv://kennan:' + process.env.MONGO_ATLAS_PWR + '@cluster0.9akcx.mongodb.net/mean-tutorial-db?retryWrites=true&w=majority', {
     promiseLibrary: require('bluebird'),
@@ -38,5 +39,8 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/post', postRouter);
 
 module.exports = app;
