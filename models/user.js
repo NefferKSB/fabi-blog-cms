@@ -7,7 +7,7 @@ let UserSchema = new Schema({
         type: String,
         required: true
     },
-    username: {
+    email: {
         type: String,
         unique: true,
         required: true
@@ -18,7 +18,7 @@ let UserSchema = new Schema({
     }
 });
 
-UserSchema.pre('save', next => {
+UserSchema.pre('save', function(next) {
     let user = this;
     if(this.isModified('password') || this.isNew) {
         bcrypt.genSalt(10, (err, salt) => {
@@ -38,7 +38,7 @@ UserSchema.pre('save', next => {
     }
 });
 
-UserSchema.methods.comparePassword = (passw, cb) => {
+UserSchema.methods.comparePassword = function(passw, cb) {
     bcrypt.compare(passw, this.password, (err, isMatch) => {
         if(err) {
             return cb(err);

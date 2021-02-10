@@ -7,17 +7,18 @@ const User = require('../models/user');
 
 //Create a router for registering a new user via a provided username and password
 router.post('/register', (req, res) => {
-    if(!req.body.fullName || !req.body.username || !req.body.password) {
+    if(!req.body.fullName || !req.body.email || !req.body.password) {
         res.json({success: false, msg: 'Please provide a full name, username, and password.'});
     } else {
         const newUser = new User ({
             fullName: req.body.fullName,
-            username: req.body.username,
+            email: req.body.email,
             password: req.body.password
         });
         //save the user
         newUser.save(err => {
             if(err) {
+                console.log(err)
                 return res.json({success: false, msg: 'Username already exists.'});
             }
             res.json({success: true, msg: 'Successful created new user.'});
@@ -28,7 +29,7 @@ router.post('/register', (req, res) => {
 //Create a router for allowing a user to login into the blog CMS via a username and password
 router.post('/login', (req, res) => {
     User.findOne({
-        username: req.body.username
+        email: req.body.email
     }, (err, user) => {
         if(err) throw err;
 
