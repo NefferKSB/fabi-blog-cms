@@ -5,7 +5,7 @@ const router = express.Router();
 const Category = require('../models/category');
 
 //Add a route to get the list of the category
-router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
     const token = getToken(req.headers);
     if(token) {
         Category.find((err, categories) => {
@@ -13,12 +13,13 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
             res.json(categories);
         });
     } else {
+        console.log("KSB")
         return res.status(403).send({success: false, msg: 'Unauthorized.'});
     }
 });
 
 //Add a route to get a single category by ID
-router.get('/:id', passport.authenticate('jwt', { session: false}), (req, res, next) => {
+router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Category.findById(req.params.id, (err, category) => {
@@ -31,7 +32,7 @@ router.get('/:id', passport.authenticate('jwt', { session: false}), (req, res, n
 });
 
 //Add a route to post a category
-router.post('/', passport.authenticate('jwt', { session: false}), (req, res, next) => {
+router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Category.create(req.body, (err, category) => {
@@ -44,7 +45,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), (req, res, nex
 });
 
 //Add a route to put a category by ID
-router.put('/:id', passport.authenticate('jwt', { session: false}), (req, res, next) => {
+router.put('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Category.findByIdAndUpdate(req.params.id, req.body, (err, category) => {
@@ -57,7 +58,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false}), (req, res, n
 });
 
 //Add a route to delete a category by ID
-router.delete('/:id', passport.authenticate('jwt', { session: false}), (req, res, next) => {
+router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Category.findByIdAndRemove(req.params.id, req.body, (err, category) => {

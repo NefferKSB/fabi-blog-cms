@@ -5,7 +5,7 @@ import { catchError, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 import { Category } from "../category/category";
 
-const BACKEND_URL = environment.apiURL + '/public/';
+const BACKEND_URL = environment.apiURL + '/category/';
 
 @Injectable({
   providedIn: 'root'
