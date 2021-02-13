@@ -8,59 +8,62 @@
   </div>
   <mat-card class="example-card">
     <form
-      #categoryForm="ngModel"
-      ngModel
-      name="categoryForm"
+      #categoryForm="ngForm"
       (submit)="onFormSubmit()"
     >
       <mat-form-field class="example-full-width">
+        <mat-label>Category Name</mat-label>
         <input
           matInput
           ngModel
           #catName="ngModel"
           name="catName"
-          placeholder="Category Name"
-        >
+          type="text"
+        />
         <mat-error>
           <span *ngIf="(catName.touched && catName.invalid)">Please enter Category Name</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
+        <mat-label>Category Description</mat-label>
         <textarea
           matInput
           ngModel
           #catDesc="ngModel"
           name="catDesc"
-          placeholder="Category Desc"
+          type="text"
         ></textarea>
         <mat-error>
           <span *ngIf="(catDesc.touched && catDesc.invalid)">Please enter Category Description</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
+        <mat-label>Category Image URL</mat-label>
         <input
           matInput
           ngModel
           #catImgUrl="ngModel"
           name="catImgUrl"
-          placeholder="Category Image URL"
-        >
+          type="text"
+        />
         <mat-error>
           <span *ngIf="catImgUrl.touched && catImgUrl.invalid">Please enter Category Image URL</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-          <ckeditor
-            matCkeditor
-            ngModel
-            #catContent="ngModel"
-            name="catContent"
-            placehoder="Category Content"
-          ></ckeditor>
-          <mat-error>
-            <span *ngIf="catContent.touched && catContent.invalid">Please enter Category Description</span>
-          </mat-error>
-        </mat-form-field>
+        <mat-label>Category Content</mat-label>
+        <ckeditor
+          matInput
+          matCkeditor
+          ngModel
+          #catContent="ngModel"
+          name="catContent"
+          type="text"
+        ></ckeditor>
+        <mat-error>
+          <span *ngIf="catContent.touched && catContent.invalid">Please enter Category Description</span>
+        </mat-error>
+      </mat-form-field>
       <div class="button-row">
         <button type="submit" [disabled]="!categoryForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
       </div>

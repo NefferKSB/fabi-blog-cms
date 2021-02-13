@@ -17,7 +17,6 @@ export class CategoryComponent implements OnInit {
   constructor(private api: CategoryService) { }
 
   ngOnInit() {
-    console.log(this);
     this.api.getCategories()
       .subscribe((res: any) => {
         this.data = res;
