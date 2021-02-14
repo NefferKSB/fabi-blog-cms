@@ -23,7 +23,7 @@ export class CategoryService {
   }
 
   getCategory(id: any): Observable<Category> {
-    const url = `${BACKEND_URL}/${id}`;
+    const url = `${BACKEND_URL}${id}`;
     return this.http.get<Category>(url)
       .pipe(
         tap(_ => this.log(`fetched Category by id=${id}`)),

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Editor } from 'ngx-editor'
 import { CategoryService } from 'src/app/services/category.service';
 
 
@@ -10,14 +10,17 @@ import { CategoryService } from 'src/app/services/category.service';
   templateUrl: './category-edit.component.html',
   styleUrls: ['./category-edit.component.scss']
 })
-export class CategoryEditComponent implements OnInit {
-  public Editor = ClassicEditor;
+export class CategoryEditComponent implements OnInit, OnDestroy {
+  editor: Editor;
   categoryForm: FormGroup = new FormGroup({});
   updated: Date = new Date();
   isLoadingResults = false;
-  id = '';
+  id = ''
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: CategoryService, private formBuilder: FormBuilder) { }
+
+  constructor(private router: Router, private route: ActivatedRoute, private api: CategoryService, private formBuilder: FormBuilder) {
+    this.editor = new Editor();
+   }
 
   ngOnInit(): void {
     this.getCategory(this.route.snapshot.params.id);
@@ -31,7 +34,8 @@ export class CategoryEditComponent implements OnInit {
 
   getCategory(id: any) {
     this.api.getCategory(id).subscribe((data: any) => {
-      this.id = data.id;
+      console.log(id)
+      this.id = data._id;
       this.categoryForm.setValue({
         prod_name: data.prod_name,
         prod_desc: data.prod_desc,
@@ -44,7 +48,7 @@ export class CategoryEditComponent implements OnInit {
     this.isLoadingResults = true;
     this.api.updateCategory(this.id, this.categoryForm.value)
       .subscribe((res: any) => {
-          const id = res.id;
+          const id = res._id;
           this.isLoadingResults = false;
           this.router.navigate(['/category-details', id]);
         }, (err: any) => {
@@ -56,5 +60,9 @@ export class CategoryEditComponent implements OnInit {
 
   categoryDetails() {
     this.router.navigate(['/category-details', this.id]);
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 }

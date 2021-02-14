@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Editor } from 'ngx-editor'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,12 +9,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './category-add.component.html',
   styleUrls: ['./category-add.component.scss']
 })
-export class CategoryAddComponent implements OnInit {
-  public Editor = ClassicEditor;
+export class CategoryAddComponent implements OnInit, OnDestroy {
   categoryForm: FormGroup = new FormGroup({});
   isLoadingResults = false;
+  editor: Editor;
 
-  constructor(private router: Router, private api: CategoryService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private api: CategoryService, private formBuilder: FormBuilder) {
+    this.editor = new Editor();
+   }
 
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
@@ -36,5 +38,9 @@ export class CategoryAddComponent implements OnInit {
           console.log(err);
           this.isLoadingResults = false;
         });
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
 }

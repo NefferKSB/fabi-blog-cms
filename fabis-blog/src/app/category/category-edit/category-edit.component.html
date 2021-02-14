@@ -48,18 +48,23 @@
           <span *ngIf="(catImgUrl.touched && catImgUrl.invalid)">Please enter Category Image URL</span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <ckeditor
-          matCkeditor
+      <div class="example-full-width">
+        <mat-label>Category Content</mat-label>
+        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor
+          matInput
           ngModel
           #catContent="ngModel"
           name="catContent"
-          placehoder="Category Content"
-        ></ckeditor>
+          [editor]="editor"
+          editable="true"
+          spellcheck="true"
+          placeholder="Type here..."
+        ></ngx-editor>
         <mat-error>
-          <span *ngIf="(catContent.touched && catContent.invalid)">Please enter Category Description</span>
+          <span *ngIf="catContent.touched && catContent.invalid">Please enter Category Content</span>
         </mat-error>
-      </mat-form-field>
+      </div>
       <div class="button-row">
         <button type="submit" [disabled]="!categoryForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
       </div>

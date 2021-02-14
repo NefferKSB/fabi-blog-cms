@@ -18,6 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatContenteditableModule } from 'mat-contenteditable';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 import { AdminComponent } from './admin/admin.component';
@@ -77,7 +78,8 @@ import { PostComponent } from './post/post.component';
     MatToolbarModule,
     MatSelectModule,
     MatGridListModule,
-    MatContenteditableModule
+    MatContenteditableModule,
+    NgxEditorModule
   ],
   providers: [
     {
