@@ -9,7 +9,6 @@ const JwtStrategy = require('passport-jwt').Strategy,
 
 module.exports = passport => {
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-        //console.log(jwt_payload)
         User.findOne({ id: jwt_payload.sub }, (err, user) => {
             User.findById(jwt_payload.data._id)
                 .then(user => {

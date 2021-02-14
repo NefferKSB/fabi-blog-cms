@@ -20,7 +20,7 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 
 //Add a route to get a single category by ID
 router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    const token = getToken(req.headers);
+    const token = req.headers.authorization.split(' ')[1];
     if(token) {
         Category.findById(req.params.id, (err, category) => {
             if(err) return next(err);
@@ -33,7 +33,7 @@ router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res, ne
 
 //Add a route to post a category
 router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    const token = getToken(req.headers);
+    const token = req.headers.authorization.split(' ')[1];
     if(token) {
         Category.create(req.body, (err, category) => {
             if(err) return next(err);
@@ -46,7 +46,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next
 
 //Add a route to put a category by ID
 router.put('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    const token = getToken(req.headers);
+    const token = req.headers.authorization.split(' ')[1];
     if(token) {
         Category.findByIdAndUpdate(req.params.id, req.body, (err, category) => {
             if(err) return next(err);
@@ -59,7 +59,7 @@ router.put('/:id', passport.authenticate('jwt', {session: false}), (req, res, ne
 
 //Add a route to delete a category by ID
 router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    const token = getToken(req.headers);
+    const token = req.headers.authorization.split(' ')[1];
     if(token) {
         Category.findByIdAndRemove(req.params.id, req.body, (err, category) => {
             if(err) return next(err);
