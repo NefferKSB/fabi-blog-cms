@@ -1,14 +1,14 @@
 const passport = require('passport');
+const config = require('../config/settings');
 require('../config/passport')(passport);
 const express = require('express');
 const router = express.Router();
 const Category = require('../models/category');
 
 //Add a route to get the list of the category
-router.get('/category', passport.authenticate('jwt', {session: false}), (req, res) => {
-    const token = getToken(req.headers);
+router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
+    const token = req.headers.authorization.split(' ')[1];
     if(token) {
-        console.log("KSB " + token)
         Category.find((err, categories) => {
             if(err) return next(err);
             res.json(categories);
@@ -19,7 +19,7 @@ router.get('/category', passport.authenticate('jwt', {session: false}), (req, re
 });
 
 //Add a route to get a single category by ID
-router.get('/category/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Category.findById(req.params.id, (err, category) => {
@@ -45,7 +45,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next
 });
 
 //Add a route to put a category by ID
-router.put('/category/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+router.put('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Category.findByIdAndUpdate(req.params.id, req.body, (err, category) => {
@@ -58,7 +58,7 @@ router.put('/category/:id', passport.authenticate('jwt', {session: false}), (req
 });
 
 //Add a route to delete a category by ID
-router.delete('/category/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+router.delete('/:id', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     const token = getToken(req.headers);
     if(token) {
         Category.findByIdAndRemove(req.params.id, req.body, (err, category) => {

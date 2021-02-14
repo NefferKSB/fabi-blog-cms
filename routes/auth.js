@@ -1,4 +1,5 @@
 const passport = require('passport');
+const config = require('../config/settings');
 require('../config/passport')(passport);
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -40,10 +41,10 @@ router.post('/login', (req, res) => {
             user.comparePassword(req.body.password, (err, isMatch) => {
                 if(isMatch && !err) {
                     //If user is found and password is right create a token
-                    const token = jwt.sign(user.toJSON(), process.env.JWT_KEY);
+                    const token = jwt.sign({data:user}, config.secret);
 
                     //Return the information including token as JSON
-                    res.json({success: true, token: 'JWT' + token});
+                    res.json({success: true, token: 'Bearer ' + token});
                 } else {
                     res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
                 }

@@ -1,24 +1,23 @@
-const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
-
-// load up the user model
-const User = require('../models/user');
-const settings = require('../config/settings'); // get settings file
+const JwtStrategy = require('passport-jwt').Strategy,
+      ExtractJwt = require('passport-jwt').ExtractJwt,
+      User = require('../models/user'),
+      settings = require('../config/settings'),
+      opts = {};
+    
+      opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken('Bearer');
+      opts.secretOrKey = settings.secret;
 
 module.exports = passport => {
-  let opts = {};
-  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
-  opts.secretOrKey = settings.secret;
-  passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-    User.findOne({id: jwt_payload.id}, (err, user) => {
-          if (err) {
-              return done(err, false);
-          }
-          if (user) {
-              done(null, user);
-          } else {
-              done(null, false);
-          }
-      });
-  }));
+    passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
+        //console.log(jwt_payload)
+        User.findOne({ id: jwt_payload.sub }, (err, user) => {
+            User.findById(jwt_payload.data._id)
+                .then(user => {
+                    if(user)
+                        return done(null, user);
+                    return done(null, false);
+                })
+                .catch(err => console.log(err));
+        });
+    }));
 };

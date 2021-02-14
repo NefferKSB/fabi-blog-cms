@@ -9,7 +9,7 @@ import { Category } from '../category';
   styleUrls: ['./category-details.component.scss']
 })
 export class CategoryDetailsComponent implements OnInit {
-  category: Category = { id: null, catName: '', catDesc: '', catImgUrl: '', catContent: '', updated: null };
+  category: Category = new Category;
   isLoadingResults = true;
 
   constructor(private route: ActivatedRoute, private api: CategoryService, private router: Router) { }

@@ -4,7 +4,7 @@ const Post = require('../models/post');
 const Category = require('../models/category');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
 
