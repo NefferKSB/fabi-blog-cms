@@ -12,9 +12,10 @@ export class CategoryDetailsComponent implements OnInit {
   category: Category = new Category;
   isLoadingResults = true;
 
-  constructor(private route: ActivatedRoute, private api: CategoryService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private api: CategoryService, private router: Router) {}
 
   ngOnInit(): void {
+    console.log(this.route.snapshot.params.id)
     this.getCategoryDetails(this.route.snapshot.params.id);
   }
 
@@ -22,6 +23,7 @@ export class CategoryDetailsComponent implements OnInit {
     this.api.getCategory(id)
       .subscribe((data: any) => {
         this.category = data;
+        this.category.id = data._id;
         console.log(this.category);
         this.isLoadingResults = false;
       });

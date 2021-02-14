@@ -12,10 +12,12 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class CategoryEditComponent implements OnInit, OnDestroy {
   editor: Editor;
-  categoryForm: FormGroup = new FormGroup({});
+  categoryForm: FormGroup = new FormGroup({
+
+  });
   updated: Date = new Date();
   isLoadingResults = false;
-  id = ''
+  id = '';
 
 
   constructor(private router: Router, private route: ActivatedRoute, private api: CategoryService, private formBuilder: FormBuilder) {
@@ -34,12 +36,12 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
 
   getCategory(id: any) {
     this.api.getCategory(id).subscribe((data: any) => {
-      console.log(id)
       this.id = data._id;
       this.categoryForm.setValue({
-        prod_name: data.prod_name,
-        prod_desc: data.prod_desc,
-        prod_price: data.prod_price
+        catName: data.catName,
+        catDesc: data.catDesc,
+        catImgUrl: data.catImgUrl,
+        catContent: data.catContent
       });
     });
   }
@@ -50,7 +52,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
       .subscribe((res: any) => {
           const id = res._id;
           this.isLoadingResults = false;
-          this.router.navigate(['/category-details', id]);
+          this.router.navigate(['/category/details', id]);
         }, (err: any) => {
           console.log(err);
           this.isLoadingResults = false;
@@ -59,7 +61,7 @@ export class CategoryEditComponent implements OnInit, OnDestroy {
   }
 
   categoryDetails() {
-    this.router.navigate(['/category-details', this.id]);
+    this.router.navigate(['/category/details', this.id]);
   }
 
   ngOnDestroy(): void {
