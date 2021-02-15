@@ -1,7 +1,6 @@
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,15 +8,20 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class LoginComponent implements OnInit {
+  //loginForm: FormGroup;
   isLoadingResults = false;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
-    this.loginForm = formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+    // this.loginForm = formBuilder.group({
+    //   email: ['', Validators.required],
+    //   password: ['', Validators.required],
+    //   remember_me: [false]
+    // });
+   }
+
+   ngOnInit() {
+
    }
 
   //Function for handling form submission
@@ -41,13 +45,5 @@ export class LoginComponent {
   //Navigate to the register page
   register() {
     this.router.navigate(['register']);
-  }
-}
-
-//Handles form validations
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }

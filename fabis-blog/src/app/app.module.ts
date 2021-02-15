@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatContenteditableModule } from 'mat-contenteditable';
 import { NgxEditorModule } from 'ngx-editor';
@@ -79,7 +80,8 @@ import { PostComponent } from './post/post.component';
     MatSelectModule,
     MatGridListModule,
     MatContenteditableModule,
-    NgxEditorModule
+    NgxEditorModule,
+    MatCheckboxModule
   ],
   providers: [
     {

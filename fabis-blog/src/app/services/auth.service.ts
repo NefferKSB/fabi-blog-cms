@@ -18,6 +18,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(data: any): Observable<any> {
+    console.log(data)
     return this.http.post<any>(BACKEND_URL + 'login', data)
       .pipe(
         tap(_ => {

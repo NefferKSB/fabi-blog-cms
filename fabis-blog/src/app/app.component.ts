@@ -23,13 +23,6 @@ export class AppComponent implements OnInit {
         this.loginStatus = false;
       }
     });
-    this.api.getCategories()
-      .subscribe((res: any) => {
-        this.categories = res;
-        console.log(this.categories);
-      }, err => {
-        console.log(err);
-      });
   }
 
   logout() {
@@ -39,5 +32,6 @@ export class AppComponent implements OnInit {
       }, err => {
         console.log(err);
       });
+    localStorage.removeItem('token');
   }
 }

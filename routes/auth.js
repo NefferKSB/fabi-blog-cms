@@ -29,6 +29,7 @@ router.post('/register', (req, res) => {
 
 //Create a router for allowing a user to login into the blog CMS via a username and password
 router.post('/login', (req, res) => {
+    console.log(req.body)
     User.findOne({
         email: req.body.email
     }, (err, user) => {

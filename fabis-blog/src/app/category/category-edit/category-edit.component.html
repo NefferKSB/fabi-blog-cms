@@ -49,7 +49,6 @@
         </mat-error>
       </mat-form-field>
       <div class="example-full-width">
-        <mat-label>Category Content</mat-label>
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
         <ngx-editor
           matInput
@@ -59,7 +58,7 @@
           [editor]="editor"
           editable="true"
           spellcheck="true"
-          placeholder="Type here..."
+          placeholder="Category Content"
         ></ngx-editor>
         <mat-error>
           <span *ngIf="catContent.touched && catContent.invalid">Please enter Category Content</span>
