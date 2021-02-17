@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(form)
       .subscribe(res => {
-        //console.log(res);
+        console.log(res);
         if(res.token) {
           localStorage.setItem('token', res.token);
           this.router.navigate(['admin']);

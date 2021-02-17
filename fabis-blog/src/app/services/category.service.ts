@@ -17,7 +17,9 @@ export class CategoryService {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(BACKEND_URL)
       .pipe(
-        tap(_ => this.log('fetched Categories')),
+        tap(_ => {
+          this.log('fetched Categories')
+        }),
         catchError(this.handleError('getCategories', []))
       );
   }

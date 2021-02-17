@@ -5,6 +5,25 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/user');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+const store = new MongoDBStore({
+    uri: 'mongodb+srv://kennan:' + process.env.MONGO_ATLAS_PWR + '@cluster0.9akcx.mongodb.net/mean-tutorial-db?retryWrites=true&w=majority',
+    collection: 'mySessions'
+});
+
+router.use(session({
+    name: 'sid',
+    secret: "Shh, its a secret!",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false,
+        sameSite: 'lax',
+        store: store,
+        maxAge: 1000 * 60 * 60 * 2 //two hours
+    }
+}));
 
 //Create a router for registering a new user via a provided username and password
 router.post('/register', (req, res) => {
@@ -29,6 +48,7 @@ router.post('/register', (req, res) => {
 
 //Create a router for allowing a user to login into the blog CMS via a username and password
 router.post('/login', (req, res) => {
+
     console.log(req.body)
     User.findOne({
         email: req.body.email
@@ -43,9 +63,12 @@ router.post('/login', (req, res) => {
                 if(isMatch && !err) {
                     //If user is found and password is right create a token
                     const token = jwt.sign({data:user}, config.secret);
+                    req.session.views = 10;
+                    const msg = (req.session.cookie);
+                    //const msg = ("You visited this page " + req.session.cookie + " times");
 
                     //Return the information including token as JSON
-                    res.json({success: true, token: 'Bearer ' + token});
+                    res.json({success: true, token: 'Bearer ' + token, session: msg});
                 } else {
                     res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
                 }

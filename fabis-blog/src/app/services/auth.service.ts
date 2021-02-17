@@ -11,14 +11,13 @@ const BACKEND_URL = environment.apiURL + '/auth/';
 })
 export class AuthService {
 
-  @Output() isLoggedIn: EventEmitter<any> = new EventEmitter();
+  @Output() isLoggedIn: EventEmitter<boolean> = new EventEmitter();
   loggedInStatus = false;
   redirectUrl: string = '';
 
   constructor(private http: HttpClient) { }
 
   login(data: any): Observable<any> {
-    console.log(data)
     return this.http.post<any>(BACKEND_URL + 'login', data)
       .pipe(
         tap(_ => {

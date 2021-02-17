@@ -5,8 +5,16 @@ const express = require('express');
 const router = express.Router();
 const Category = require('../models/category');
 
+passport.serializeUser(function(user, done) {
+    done(null, user);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    done(null, user);
+  });
+
 //Add a route to get the list of the category
-router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/', passport.authenticate('jwt'), (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     if(token) {
         Category.find((err, categories) => {
