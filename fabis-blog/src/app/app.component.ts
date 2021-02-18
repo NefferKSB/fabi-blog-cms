@@ -16,13 +16,9 @@ export class AppComponent implements OnInit {
   constructor(private api: HomeService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.authService.isLoggedIn.subscribe((status: any) => {
-      if (status === true) {
-        this.loginStatus = true;
-      } else {
-        this.loginStatus = false;
-      }
-    });
+    console.log(this.authService.isLoggedIn)
+    if(this.authService.isLoggedIn)
+      this.loginStatus = true;
   }
 
   logout() {

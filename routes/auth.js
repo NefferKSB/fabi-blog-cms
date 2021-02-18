@@ -61,14 +61,15 @@ router.post('/login', (req, res) => {
             //Check if password matches
             user.comparePassword(req.body.password, (err, isMatch) => {
                 if(isMatch && !err) {
+
                     //If user is found and password is right create a token
                     const token = jwt.sign({data:user}, config.secret);
-                    req.session.views = 10;
-                    const msg = (req.session.cookie);
-                    //const msg = ("You visited this page " + req.session.cookie + " times");
+
+                    //If user is found and password is set session user id
+                    req.session.userID = user._id;
 
                     //Return the information including token as JSON
-                    res.json({success: true, token: 'Bearer ' + token, session: msg});
+                    res.json({success: true, token: 'Bearer ' + token, session: req.session});
                 } else {
                     res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
                 }
@@ -79,6 +80,11 @@ router.post('/login', (req, res) => {
 
 //Create a router for logout
 router.post('/logout', passport.authenticate('jwt', { session: false}), (req, res) => {
+    // req.session.destroy(err => {
+    //     if(err) 
+    //         return res.redirect('/home');
+    //     res.clearCookie('sid') //To do set as a constant
+    // });
     req.logout();
     res.json({success: true});
 });
