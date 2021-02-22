@@ -39,6 +39,7 @@ import { PostEditComponent } from './post/post-edit/post-edit.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { PostComponent } from './post/post.component';
+import { SubmitComponent } from './auth/login/submit.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { PostComponent } from './post/post.component';
     PostComponent,
     PostDetailsComponent,
     PostAddComponent,
-    PostEditComponent
+    PostEditComponent,
+    SubmitComponent
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,28 @@
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  //loginForm: FormGroup;
+export class LoginComponent implements OnInit{
+  @Output() isLoggedin: EventEmitter<any> = new EventEmitter();
+  //isLoggedin = false;
   isLoadingResults = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit() {
+    this.isLoggedin.emit(false);
+  }
+
+  setLoginStatus() {
+    //this.isLoggedin = true;
+    this.isLoggedin.emit(true);
+  }
 
   //Function for handling form submission
   onFormSubmit(form: NgForm) {
@@ -24,7 +34,7 @@ export class LoginComponent {
       .subscribe(res => {
         if(res.token) {
           console.log(res)
-          localStorage.setItem('token', res.token);
+          localStorage.setItem('token', res.token); //To do update this so session cookies are used instead
           this.router.navigate(['admin']);
         }
       }, err => {

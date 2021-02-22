@@ -1,6 +1,6 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
@@ -10,8 +10,7 @@ const BACKEND_URL = environment.apiURL + '/auth/';
   providedIn: 'root'
 })
 export class AuthService {
-
-  @Output() isLoggedIn: EventEmitter<boolean> = new EventEmitter();
+  private authStatusListener = new Subject<boolean>();
   loggedInStatus = false;
   redirectUrl: string = '';
 
@@ -21,8 +20,7 @@ export class AuthService {
     return this.http.post<any>(BACKEND_URL + 'login', data)
       .pipe(
         tap(_ => {
-          this.isLoggedIn.emit(true);
-          this.loggedInStatus = true;
+          this.authStatusListener.next(true);
         }),
         catchError(this.handleError('login', []))
       );
@@ -32,8 +30,7 @@ export class AuthService {
     return this.http.post<any>(BACKEND_URL + 'logout', {})
       .pipe(
         tap(_ => {
-          this.isLoggedIn.emit(false);
-          this.loggedInStatus = false;
+          this.authStatusListener.next(false);
         }),
         catchError(this.handleError('logout', []))
       );
@@ -45,6 +42,10 @@ export class AuthService {
         tap(_ => this.log('register')),
         catchError(this.handleError('registration', []))
       );
+  }
+
+  getAuthStatusListener() {
+    return this.authStatusListener.asObservable();
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
