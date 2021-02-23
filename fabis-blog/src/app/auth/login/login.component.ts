@@ -10,7 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit{
   @Output() isLoggedin: EventEmitter<any> = new EventEmitter();
-  //isLoggedin = false;
   isLoadingResults = false;
 
   constructor(private router: Router, private authService: AuthService) {}
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit{
   }
 
   setLoginStatus() {
-    //this.isLoggedin = true;
     this.isLoggedin.emit(true);
   }
 
@@ -33,7 +31,6 @@ export class LoginComponent implements OnInit{
     this.authService.login(form)
       .subscribe(res => {
         if(res.token) {
-          console.log(res)
           localStorage.setItem('token', res.token); //To do update this so session cookies are used instead
           this.router.navigate(['admin']);
         }

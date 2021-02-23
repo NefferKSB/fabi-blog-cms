@@ -13,7 +13,6 @@ export class CategoryComponent implements OnInit {
   displayedColumns: string[] = ['catName', 'catDesc'];
   data: Category[] = [];
   isLoadingResults = true;
-  loginStatus = false;
 
   constructor(private api: CategoryService) {}
 

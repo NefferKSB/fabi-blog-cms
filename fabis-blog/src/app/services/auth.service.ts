@@ -11,7 +11,6 @@ const BACKEND_URL = environment.apiURL + '/auth/';
 })
 export class AuthService {
   authStatusListener = new Subject<boolean>();
-  loggedInStatus = false;
   redirectUrl: string = '';
 
   constructor(private http: HttpClient) { }
