@@ -10,7 +10,7 @@ const BACKEND_URL = environment.apiURL + '/auth/';
   providedIn: 'root'
 })
 export class AuthService {
-  private authStatusListener = new Subject<boolean>();
+  authStatusListener = new Subject<boolean>();
   loggedInStatus = false;
   redirectUrl: string = '';
 
