@@ -11,15 +11,18 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit{
   categories: Category[] = [];
-  isLoggedIn = false;
   private authStatusSub: Subscription = new Subscription;
+  isLoggedIn = localStorage.getItem('isLoggedIn');
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(){
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
-        this.isLoggedIn = authStatus;
+        if(authStatus) {
+          localStorage.setItem('isLoggedIn', 'true');
+          this.isLoggedIn = 'true';
+        }
       }
     );
   }
@@ -27,11 +30,12 @@ export class AppComponent implements OnInit{
   logout() {
     this.authService.logout()
       .subscribe((res: any) => {
-        this.isLoggedIn = false;
+        this.isLoggedIn = 'false';
         this.router.navigate(['/']);
       }, err => {
         console.log(err);
       });
+    localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('token');
   }
 
