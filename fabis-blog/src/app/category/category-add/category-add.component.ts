@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import { Editor } from 'ngx-editor'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-category-add',
@@ -27,9 +28,10 @@ export class CategoryAddComponent implements OnInit, OnDestroy {
     });
   }
 
-  onFormSubmit() {
+  onFormSubmit(form: Category) {
     this.isLoadingResults = true;
-    this.api.addCategory(this.categoryForm.value)
+    console.log(form)
+    this.api.addCategory(form)
       .subscribe((res: any) => {
           const id = res._id;
           this.isLoadingResults = false;

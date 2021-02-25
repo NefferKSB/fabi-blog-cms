@@ -44,6 +44,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res, next
     const token = req.headers.authorization.split(' ')[1];
     if(token) {
         Category.create(req.body, (err, category) => {
+            console.log(req.body);
             if(err) return next(err);
             res.json(category);
         });
