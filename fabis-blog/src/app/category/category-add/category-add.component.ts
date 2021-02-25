@@ -33,7 +33,7 @@ export class CategoryAddComponent implements OnInit, OnDestroy {
       .subscribe((res: any) => {
           const id = res._id;
           this.isLoadingResults = false;
-          this.router.navigate(['/category-details', id]);
+          this.router.navigate(['/category/details', id]);
         }, (err: any) => {
           console.log(err);
           this.isLoadingResults = false;
