@@ -15,9 +15,7 @@
       <mat-form-field class="example-full-width">
         <input
           matInput
-          ngModel
-          name="catName"
-          #catName="ngModel"
+          [formControl]="catName"
           placeholder="Category Name"
         >
         <mat-error>
@@ -27,9 +25,7 @@
       <mat-form-field class="example-full-width">
         <textarea
           matInput
-          ngModel
-          name="catDesc"
-          #catDesc="ngModel"
+          [formControl]="catDesc"
           placeholder="Category Desc"
         ></textarea>
         <mat-error>
@@ -39,9 +35,7 @@
       <mat-form-field class="example-full-width">
         <input
           matInput
-          ngModel
-          #catImgUrl="ngModel"
-          name="catImgUrl"
+          [formControl]="catImgUrl"
           placeholder="Category Image URL"
         >
         <mat-error>
@@ -52,9 +46,7 @@
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
         <ngx-editor
           matInput
-          ngModel
-          #catContent="ngModel"
-          name="catContent"
+          [formControl]="catContent"
           [editor]="editor"
           editable="true"
           spellcheck="true"

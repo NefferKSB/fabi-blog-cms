@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Editor } from 'ngx-editor'
 import { CategoryService } from 'src/app/services/category.service';
+import { Category } from '../category';
 
 
 @Component({
@@ -12,43 +13,45 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class CategoryEditComponent implements OnInit, OnDestroy {
   editor: Editor;
-  categoryForm: FormGroup = new FormGroup({
-
-  });
+  catForm: Category = new Category;
+  catName = new FormControl('');
+  catDesc = new FormControl('');
+  catImgUrl = new FormControl('');
+  catContent = new FormControl('');
   updated: Date = new Date();
   isLoadingResults = false;
   id = '';
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private api: CategoryService, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private route: ActivatedRoute, private api: CategoryService) {
     this.editor = new Editor();
    }
 
   ngOnInit(): void {
     this.getCategory(this.route.snapshot.params.id);
-    this.categoryForm = this.formBuilder.group({
-      catName : ['', Validators.required],
-      catDesc : ['', Validators.required],
-      catImgUrl : ['', Validators.required],
-      catContent : ['', Validators.required]
-    });
   }
 
   getCategory(id: any) {
     this.api.getCategory(id).subscribe((data: any) => {
       this.id = data._id;
-      this.categoryForm.setValue({
-        catName: data.catName,
-        catDesc: data.catDesc,
-        catImgUrl: data.catImgUrl,
-        catContent: data.catContent
-      });
+      this.catName.setValue(data.catName);
+      this.catDesc.setValue(data.catDesc);
+      this.catImgUrl.setValue(data.catImgUrl);
+      this.catContent.setValue(data.catContent);
     });
   }
 
   onFormSubmit() {
     this.isLoadingResults = true;
-    this.api.updateCategory(this.id, this.categoryForm.value)
+    this.catForm = {
+      id: undefined,
+      catName: this.catName.value,
+      catDesc: this.catDesc.value,
+      catImgUrl: this.catImgUrl.value,
+      catContent: this.catContent.value,
+      updated: this.updated
+    };
+    this.api.updateCategory(this.id, this.catForm)
       .subscribe((res: any) => {
           const id = res._id;
           this.isLoadingResults = false;
