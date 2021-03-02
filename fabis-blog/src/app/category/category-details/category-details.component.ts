@@ -11,6 +11,7 @@ import { Category } from '../category';
 export class CategoryDetailsComponent implements OnInit {
   category: Category = new Category;
   isLoadingResults = true;
+  updatedDate = '';
 
   constructor(private route: ActivatedRoute, private api: CategoryService, private router: Router) {}
 
@@ -24,7 +25,13 @@ export class CategoryDetailsComponent implements OnInit {
       .subscribe((data: any) => {
         this.category = data;
         this.category.id = data._id;
-        console.log(this.category);
+
+        //Set date string
+        const date = new Date(this.category.updated);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+        this.updatedDate = date.toLocaleDateString('en-US', options);
+
+        console.log(this.updatedDate);
         this.isLoadingResults = false;
       });
   }

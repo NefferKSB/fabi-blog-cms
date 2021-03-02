@@ -8,16 +8,15 @@
   </div>
   <mat-card class="example-card">
     <mat-card-header>
-      <mat-card-title><h2>{{category.catName}}</h2></mat-card-title>
-      <mat-card-subtitle>{{category.catDesc}}</mat-card-subtitle>
+      <mat-card-title><h2>Category Name: {{category.catName}}</h2></mat-card-title>
+      <mat-card-subtitle><b>Category Description:</b> {{category.catDesc}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image src="{{category.catImgUrl}}" alt="{{category.catName}}">
     <mat-card-content>
       <dl>
-        <dt>Category Content:</dt>
+        <dt><b>Category Content:</b></dt>
         <dd [innerHTML]="category.catContent"></dd>
-        <dt>Updated At:</dt>
-        <dd>{{category.updated | date}}</dd>
+        <dt><b>Updated At:</b> {{updatedDate}}</dt>
       </dl>
     </mat-card-content>
     <mat-card-actions>

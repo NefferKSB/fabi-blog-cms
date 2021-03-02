@@ -4,5 +4,5 @@ export class Category {
   catDesc: string | undefined;
   catImgUrl: string | undefined;
   catContent: string | undefined;
-  updated: Date | undefined;
+  updated: Date = new Date;
 }
